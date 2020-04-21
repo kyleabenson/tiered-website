@@ -1,0 +1,93 @@
+---
+- name: Setup Azure Infra
+  hosts: localhost
+  vars_files:
+    - config.yml
+
+  tasks:
+    - name: Setup Resource Group in Azure
+      azure_rm_resourcegroup:
+        name: "{{ azure_resource_group }}"
+        location: eastus
+        tags:
+            testing: testing
+            delete: never
+
+    - name: Create a virtual network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ azure_resource_group }}"
+        name: "{{ azure_network_name }}"
+        address_prefixes_cidr:
+        - "10.0.0.0/16"
+
+    - name: Create a subnet
+      azure_rm_subnet:
+        resource_group: "{{ azure_resource_group }}"
+        virtual_network_name: "{{ azure_network_name }}"
+        name: default
+        address_prefix_cidr: "10.0.0.0/16"
+
+    - name: Create a public ip address
+      azure_rm_publicipaddress:
+        resource_group: "{{ azure_resource_group }}"
+        name: testip
+        allocation_method: static
+
+    - name: Create loadbalancer
+      azure_rm_loadbalancer:
+        resource_group: "{{ azure_resource_group }}"
+        name: test_lb
+        frontend_ip_configurations:
+        - name: frontendipconf0
+          public_ip_address: testip
+
+    - name: Create frontend virtual machine scaling set
+      azure_rm_virtualmachinescaleset:
+            resource_group: "{{ azure_resource_group }}"
+            name: testvmss
+            vm_size: Standard_DS1_v2
+            capacity: 3
+            virtual_network_name: "{{ azure_network_name }}"
+            upgrade_policy: Manual
+            load_balancer: test_lb
+            subnet_name: default
+            admin_username: "{{ admin_user }}"
+            ssh_password_enabled: false
+            ssh_public_keys:
+            - path: "/home/{{ admin_user }}/.ssh/authorized_keys"
+              key_data: 
+            managed_disk_type: Standard_LRS
+            image:
+                offer: RHEL
+                publisher: RedHat
+                sku: 8.1
+                version: latest
+            data_disks:
+            - lun: 0
+              disk_size_gb: 64
+              caching: ReadWrite
+              managed_disk_type: Standard_LRS
+
+    - name: Create (or update) MySQL Server
+      azure_rm_mysqlserver:
+        resource_group: "{{ azure_resource_group }}"
+        name: "{{ azure_sql_server_name }}"
+        sku:
+          name: B_Gen5_1
+          tier: Basic
+        location: eastus
+        storage_mb: 5120
+        enforce_ssl: True
+        version: 5.7
+        admin_username: "{{ admin_user }}"
+        admin_password: "{{ admin_pass }}"
+
+    - name: Create (or update) Firewall Rule
+      azure_rm_mysqlfirewallrule:
+          resource_group: "{{ azure_resource_group }}"
+          server_name: "{{ azure_sql_server_name }}"
+          name: firewallrulecrudtest-5370
+          start_ip_address: 0.0.0.0
+          end_ip_address: 255.255.255.255
+
+
