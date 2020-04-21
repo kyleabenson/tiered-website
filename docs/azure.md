@@ -28,9 +28,16 @@ If preferred you can also store credentials in ``` ~/.azure/credentials```
 
 TODO
 ## Presentation
+For the purposes of this lab we're going to build 3 presentation layer nodes, which will be setup in a round-robin fashion behind the load balancer.
+
 ## Application
+The business or application layer for this exercise is just a single node, although you could expand and place a load balancer here if needed for scaling constraints
+
 ## Database 
+The database will be a hosted offering on Azure, which reduces some of the complexity and maintenance of this app
+
 ## Load Balancer
+The load balancer will also be a hosted offering on Azure, again to reduce the complexities of maintenance but allowing for us to instantiate, modify, and destroy with Ansible in a relatively easy fashion.
 
 ## Tips
 ** Using UI Based Resources for help **
