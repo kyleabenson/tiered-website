@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Azure
-permalink: /azure/
+permalink: /tiered-website/docs/azure/
 ---
 # Azure Deployment
 {: .no_toc }
