@@ -21,6 +21,7 @@ TODO
 ## Prerequisites 
 Before interacting with Google Cloud Platform, you'll need to install some dependencies for the GCP colletion. Specifically the `requests` and `google-auth` packages:
 ``` pip install requests google-auth```  
+
 You'll also need to configure your credentials. In this tutorial we'll be using the `serviceaccount` type credential, so be sure to checkout the [GCP Getting Started Guide](https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html) if you're not familiar with that process.  
 ## Presentation
 For the presentation layer, we'll be creating a set of autoscale VMs to automatically scale up and down based on a health check metric. For the purposes of this tutorial we'll be using CPU load on the systems. We can achieve this with 3 tasks:
