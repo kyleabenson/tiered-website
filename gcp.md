@@ -7,7 +7,7 @@ permalink: /google/
 {: .no_toc }
 
 
-Google Cloud Platform has a rich and certified collection that provides a good deal of ease and flexibility in getting started with our deployment. 
+Google Cloud Platform has a comprehensive and certified Ansible collection that provides a good deal of ease and flexibility in getting started with our deployment. 
 {: .fs-6 .fw-300 }
 
 ## Table of contents
