@@ -178,7 +178,7 @@
       register: instance
 
     - name: Create a Database User
-      gcp_sql_user:
+      google.cloud.gcp_sql_user:
         name: "{{ admin_user}}"
         password: "{{ admin_password }}"
         instance: "{{ instance }}"
