@@ -29,10 +29,9 @@ Then you'll want to install the collection:
 `ansible-galaxy collection install google.cloud`
 
 The syntax for calling a collection looks slightly different. While there are options to make this less apparent I am using the full syntax to highlight that we're using a collection, and you'll notice that calling modules and roles looks slightly different:  
-`google.cloud.gcp_compute_instance`
+`google.cloud.gcp_compute_instance`  
 Where the normal module would look like:  
-`gcp_compute_instance`
-
+`gcp_compute_instance`  
 
 Before interacting with Google Cloud Platform, you'll need to install some dependencies for the GCP colletion. Specifically the `requests` and `google-auth` packages:  
 ``` pip install requests google-auth```  
