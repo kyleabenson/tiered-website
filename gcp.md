@@ -22,19 +22,19 @@ Google Cloud Platform has a rich and certified collection that provides a good d
 This guide walks through some complex steps and assumes some existing knowledge of using Ansible. That being said I have done my best to make this easy to operate. If you complete the work inside the prerequisite section, you should be able to execute this playbook without issue.
 
 ### A note about collections
-We'll be using the Google Cloud Collection for this exercise, which means you'll need to be running at least Ansible version 2.9 in order to proceed. To confirm your version, run:
+We'll be using the Google Cloud Collection for this exercise, which means you'll need to be running at least Ansible version 2.9 in order to proceed. To confirm your version, run:  
 `ansible --version`  
 
-Then you'll want to install the collection:
+Then you'll want to install the collection:  
 `ansible-galaxy collection install google.cloud`
 
-The syntax for calling a collection looks slightly different. While there are options to make this less apparent I am using the full syntax to highlight that we're using a collection, and you'll notice that calling modules and roles looks slight different:
+The syntax for calling a collection looks slightly different. While there are options to make this less apparent I am using the full syntax to highlight that we're using a collection, and you'll notice that calling modules and roles looks slightly different:  
 `google.cloud.gcp_compute_instance`
-Where the normal module would look like:
+Where the normal module would look like:  
 `gcp_compute_instance`
 
 
-Before interacting with Google Cloud Platform, you'll need to install some dependencies for the GCP colletion. Specifically the `requests` and `google-auth` packages:
+Before interacting with Google Cloud Platform, you'll need to install some dependencies for the GCP colletion. Specifically the `requests` and `google-auth` packages:  
 ``` pip install requests google-auth```  
 
 You'll also need to configure your credentials. In this tutorial we'll be using the `serviceaccount` type credential, so be sure to checkout the [GCP Getting Started Guide](https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html) if you're not familiar with that process. 
