@@ -9,79 +9,113 @@
       azure_rm_resourcegroup:
         name: "{{ azure_resource_group }}"
         location: eastus
-        tags:
-            testing: testing
-            delete: never
 
-    - name: Create security group
-      azure_rm_securitygroup:
+    - name: Create Public Ip Address for LB
+      azure_rm_publicipaddress:
         resource_group: "{{ azure_resource_group }}"
-        name: basicsecgroup
-        purge_rules: yes
-        rules:
-            - name: 'AllowSSH'
-              protocol: Tcp
-              destination_port_range: 22
-              access: Allow
-              priority: 1000    
-              direction: Inbound
-              source_address_prefix: 'VirtualNetwork'
-            - name: 'AllowHTTPPorts'
-              protocol: Tcp
-              destination_port_range:
-               - 80
-               - 443
-              access: Allow
-              priority: 1001
+        name: myPublicIP
+        allocation_method: static
+        sku: Standard
+
+    - name: Create Load Balancer
+      azure_rm_loadbalancer:
+        resource_group: "{{ azure_resource_group }}"
+        name: myLoadBalancer
+        sku: Standard
+        backend_address_pools:
+         - name: myBackendPool
+        frontend_ip_configurations:
+         - name: myFrontEnd
+           public_ip_address: myPublicIP
+           private_ip_allocation_method: Dynamic
+        probes:
+         - name: myHealthProbe
+           port: 80
+           protocol: Tcp
+           fail_count: 2
+        load_balancing_rules:
+          - name: myHTTPRule
+            frontend_ip_configuration: myFrontEnd
+            backend_address_pool: myBackendPool
+            frontend_port: 80
+            backend_port: 80
+            protocol: Tcp
+            probe: myHealthProbe
 
     - name: Create a virtual network
       azure_rm_virtualnetwork:
         resource_group: "{{ azure_resource_group }}"
-        name: "{{ azure_network_name }}"
-        address_prefixes_cidr:
-        - "10.0.0.0/16"
+        name: myVnet
+        address_prefixes_cidr: "10.0.0.0/16"
 
     - name: Create a subnet
       azure_rm_subnet:
         resource_group: "{{ azure_resource_group }}"
-        virtual_network_name: "{{ azure_network_name }}"
-        name: default
-        address_prefix_cidr: "10.0.0.0/16"
+        virtual_network_name: myVnet
+        name: mySubnet
+        address_prefix_cidr: "10.0.0.0/24"
 
-    - name: Create public ip addresses
+    - name: Create security group
+      azure_rm_securitygroup:
+        resource_group: "{{ azure_resource_group }}"
+        name: myNetworkSecurityGroup
+        rules:
+            - name: 'myNetworkSecurityGroupRuleHTTP'
+              protocol: Tcp
+              destination_port_range: 80
+              access: Allow
+              priority: 200
+
+    - name: Create virtual nics for LB backend hosts
+      azure_rm_networkinterface:
+        name: "nic{{item}}"
+        resource_group: "{{ azure_resource_group }}"
+        virtual_network: myVnet
+        subnet_name: mySubnet
+        security_group: myNetworkSecurityGroup
+        ip_configurations:
+          - name: ipconfig1
+            primary: True
+            load_balancer_backend_address_pools:
+              - name: MyBackendPool
+                load_balancer: myLoadBalancer
+      with_items:
+       - 1
+       - 2
+       - 3
+
+    - name: Create Presentation Layer VM
+      azure_rm_virtualmachine:
+        resource_group: "{{ azure_resource_group }}"
+        name: "backingVM{{item}}"
+        public_ip_allocation_method: Disabled
+        network_interfaces: "nic{{item}}"
+        admin_username: "{{ admin_user }}"
+        vm_size: Standard_DS1_v2
+        open_ports: 
+         - 80
+         - 22
+        ssh_password_enabled: false
+        ssh_public_keys:
+          - path: "/home/{{ admin_user }}/.ssh/authorized_keys"
+            key_data: "{{ssh_pub_key}}"
+        image:
+            offer: "{{ azure_image_details.offer }}"
+            publisher: "{{ azure_image_details.publisher }}"
+            sku: "{{ azure_image_details.sku }}"
+            version: "{{ azure_image_details.version }}"
+      with_items:
+       - 1
+       - 2
+       - 3
+
+    - name: Create Public Ip Address for Jump Host
       azure_rm_publicipaddress:
         resource_group: "{{ azure_resource_group }}"
-        name: "{{ item }}"
+        name: jumphostip
         allocation_method: static
-      with_items:
-            - loadbalanceip
-            - jumphostip    
 
-    - name: Create load balancer
-      azure_rm_loadbalancer:
-        resource_group: "{{ azure_resource_group }}"
-        name: "{{ azure_lb_name }}"
-        frontend_ip_configurations:
-         - name: frontendipconf0
-           public_ip_address: loadbalanceip
-        backend_address_pools:
-         - name: backendaddrpool0
-        probes:
-         - name: probe0
-           port: 80
-           protocol: Http
-           interval: 10
-           fail_count: 3
-           request_path: /
-        load_balancing_rules:
-          - name: lbrbalancingrule0
-            frontend_ip_configuration: frontendipconf0
-            backend_address_pool: backendaddrpool0
-            frontend_port: 80
-            backend_port: 80
-            probe: probe0
-
-    - name: Create a jump host
+    - name: Create a Jump Host
       azure_rm_virtualmachine:
         resource_group: "{{ azure_resource_group }}"
         name: jumpVM
@@ -97,81 +131,3 @@
             publisher: "{{ azure_image_details.publisher }}"
             sku: "{{ azure_image_details.sku }}"
             version: "{{ azure_image_details.version }}"
-
-    # - name: Create Presentation Layer Load Balancer
-    #   azure_rm_loadbalancer:
-    #     resource_group: "{{ azure_resource_group }}"
-    #     name: "{{ azure_lb_name }}"
-    #     frontend_ip_configurations:
-    #     - name: frontendipconf0
-    #       public_ip_address: loadbalanceip
-
-    - name: Create Presentation Layer virtual machine scaling set
-      azure_rm_virtualmachinescaleset:
-            resource_group: "{{ azure_resource_group }}"
-            name: testvmss
-            vm_size: Standard_DS1_v2
-            capacity: 3
-            virtual_network_name: "{{ azure_network_name }}"
-            upgrade_policy: Manual
-            load_balancer: "{{ azure_lb_name }}"
-            subnet_name: default
-            security_group: basicsecgroup
-            admin_username: "{{ admin_user }}"
-            ssh_password_enabled: false
-            ssh_public_keys:
-            - path: "/home/{{ admin_user }}/.ssh/authorized_keys"
-              key_data: "{{ssh_pub_key}}"
-            managed_disk_type: Standard_LRS
-            image:
-                offer: "{{ azure_image_details.offer }}"
-                publisher: "{{ azure_image_details.publisher }}"
-                sku: "{{ azure_image_details.sku }}"
-                version: "{{ azure_image_details.version }}"
-                data_disks:
-                - lun: 0
-                disk_size_gb: 64
-                caching: ReadWrite
-                managed_disk_type: Standard_LRS
-
-    - name: Create Application Layer VM
-      azure_rm_virtualmachine:
-        resource_group: "{{ azure_resource_group }}"
-        name: appLayerVm
-        public_ip_allocation_method: Disabled
-        admin_username: "{{ admin_user }}"
-        vm_size: Standard_DS1_v2
-        ssh_password_enabled: false
-        ssh_public_keys:
-          - path: "/home/{{ admin_user }}/.ssh/authorized_keys"
-            key_data: "{{ssh_pub_key}}"
-        image:
-            offer: "{{ azure_image_details.offer }}"
-            publisher: "{{ azure_image_details.publisher }}"
-            sku: "{{ azure_image_details.sku }}"
-            version: "{{ azure_image_details.version }}"
-
-    - name: Create Database Layer MySQL Server 
-      azure_rm_mysqlserver:
-        resource_group: "{{ azure_resource_group }}"
-        name: "{{ azure_sql_server_name }}"
-        sku:
-          name: B_Gen5_1
-          tier: Basic
-        location: "{{ azure_location    }}"
-        storage_mb: 5120
-        enforce_ssl: True
-        version: 5.7
-        admin_username: "{{ admin_user }}"
-        admin_password: "{{ admin_pass }}"
-
-    - name: Create (or update) Firewall Rule
-      azure_rm_mysqlfirewallrule:
-          resource_group: "{{ azure_resource_group }}"
-          server_name: "{{ azure_sql_server_name }}"
-          name: firewallrulecrudtest-5370
-          start_ip_address: 0.0.0.0
-          end_ip_address: 255.255.255.255
-
-
-# Need to configure hosts post deployment
