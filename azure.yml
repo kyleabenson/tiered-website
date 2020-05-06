@@ -104,6 +104,7 @@
             publisher: "{{ azure_image_details.publisher }}"
             sku: "{{ azure_image_details.sku }}"
             version: "{{ azure_image_details.version }}"
+        custom_data: "{{ lookup('file', 'cloud-init.txt') }}"
       with_items:
        - 1
        - 2
@@ -131,3 +132,42 @@
             publisher: "{{ azure_image_details.publisher }}"
             sku: "{{ azure_image_details.sku }}"
             version: "{{ azure_image_details.version }}"
+
+    - name: Create Application Layer VM
+      azure_rm_virtualmachine:
+        resource_group: "{{ azure_resource_group }}"
+        name: appLayerVm
+        public_ip_allocation_method: Disabled
+        admin_username: "{{ admin_user }}"
+        vm_size: Standard_DS1_v2
+        ssh_password_enabled: false
+        ssh_public_keys:
+          - path: "/home/{{ admin_user }}/.ssh/authorized_keys"
+            key_data: "{{ssh_pub_key}}"
+        image:
+            offer: "{{ azure_image_details.offer }}"
+            publisher: "{{ azure_image_details.publisher }}"
+            sku: "{{ azure_image_details.sku }}"
+            version: "{{ azure_image_details.version }}"
+
+    - name: Create Database Layer MySQL Server 
+      azure_rm_mysqlserver:
+        resource_group: "{{ azure_resource_group }}"
+        name: "{{ azure_sql_server_name }}"
+        sku:
+          name: B_Gen5_1
+          tier: Basic
+        location: "{{ azure_location    }}"
+        storage_mb: 5120
+        enforce_ssl: True
+        version: 5.7
+        admin_username: "{{ admin_user }}"
+        admin_password: "{{ admin_pass }}"
+
+    - name: Create (or update) Firewall Rule
+      azure_rm_mysqlfirewallrule:
+          resource_group: "{{ azure_resource_group }}"
+          server_name: "{{ azure_sql_server_name }}"
+          name: firewallrulecrudtest-5370
+          start_ip_address: 0.0.0.0
+          end_ip_address: 255.255.255.255
