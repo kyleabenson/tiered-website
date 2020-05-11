@@ -1,21 +1,9 @@
 ---
-layout: page
+id: gcp
 title: Google Cloud Platform
-permalink: /google/
+sidebar_label: Google Cloud Platform
 ---
-# Configuration
-{: .no_toc }
-
-
 Google Cloud Platform has a comprehensive and certified Ansible collection that provides a good deal of ease and flexibility in getting started with our deployment. 
-{: .fs-6 .fw-300 }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
----
 
 ## Prerequisites 
 

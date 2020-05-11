@@ -1,22 +1,17 @@
 ---
-layout: page
+id: azure
 title: Azure
-permalink: /tiered-website/docs/azure/
+sidebar_label: Azure
 ---
+
 # Azure Deployment
-{: .no_toc }
+
 
 
 Deploying a traditional 3 tier application to Azure is a common way people get started with cloud providers. This model, often known as *lift and shift* allows you to quickly get started in the cloud using traditional deployment paradigms, without necessarily taking advantage of cloud optimized features.
 
 At the end of this exercise, we'll have installed a [TO DO simple web app](#) across this environment.
-{: .fs-6 .fw-300 }
 
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
 ---
 ## Prerequisities 
 

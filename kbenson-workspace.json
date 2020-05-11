@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "kbenson-workspace",
+  "private_key_id": "e0aa59d7f29aa862c8b0f845ac91f61eb0b97fe8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCawNI0qyASH3rd\nu2JiXq9oEKHyhw0t4tkIgGx0196aiM4UJlOAV8UFr/nOqDi35/bWKD0kAxwzK2Cj\nyV8drmkVcYxE+SZWgdX+4B+1Jy+DjAO9k7oFxLVBzvK7lHK0VuHXCv5gCDDg9cXg\nNFqhoIxEMYc15lmyDkIP3nknUSaSiOf/W617dD2gL6s1YHhzB2ItFL/esne7EMSN\nVWNXdenoek8uGWRJQ67tQemRWYFx55oFZ4CfG2MXmEvCrTNxDKk5m4n9i2tEpRRW\ndVJtlNLWy8mwq31iLm7u7+hws/P0a/hVJiwXdFPeXdZR8ivq/QbanS4afJUXcLOM\nBuS1J6q1AgMBAAECggEAA1RHN9A/2Hpdfs955N4SAPegPEldsurqVC2X57jMw0W5\nK6OaPUZMgnxQL/sPfIL2UCu9pC/K8TdE+3d1q+JLxKUHz8raYWPZ3wNV7n3a0eyQ\nftYV21G2Vb8zGqHHCL+SJgZ70kR3pLqBpZQ99OcxM7bEqJfj8YAvOXJfgd7tj2gJ\nBEmlLV5ok/2/CidoT6sa7uii9s5pn1XVX4mfg+pIV/7597ispxisYjxUFSkRtMyR\n2UOik3oOuBlbPeegRsHX1zRP30/KMyg4opRQuH2zw4ikEPMB2GsyuNJY3qUwZSCp\ng/5y8dA2HVHsKX138UBWEvHjHWVuatPyEIZ5yFIoGwKBgQDSbSliyrIo7XcPBUC2\ne9YXBSJTjs/9qIsimRCT6mIKBEstXnFro7X8kqmfB4dlpbj/gL1pJbd7cmCF4d8S\nHdsNIDDqyB8jtl16VbZvkV9L0AougaRjrHfhn3t3ekFBB230GuW1XNw1tu4xLJV8\nCHdnWkFJJMkzWvzj0t29TgZoywKBgQC8RO0CgzjgK0gC0CdxzjC6/AMBcs4wnghd\nIAKr9Ti5JcPBnTUc4DcNuEjQMkZgPP9wu2ljzi3HVU/cPKHwTaJUrY1vCHREQsJ0\nlKC6E+S3qc7hErBhzsxxPE3zBmEm0iU111+dX96+pA+rNUxy0XU9lRoG5hhezVPI\nhSag7i1KfwKBgQCqWJCOV0TO+R3O3RO8Jpfz3sYhGpWp5Q1tnrfa5n0jWsJ5IeFz\nn/4tT5VdFj03vmb6//9V5aCZoMge2fE5u02fXJX9GrCKupEF/elIfEjHGM2FRJIN\n1ord7buHx0KYICmU2Uln/pqOKV6+FDeXR0tSMbB0RAFVP61FyWiUXVu27QKBgC8A\nIg8zhTppc7PIFWDS8dVsXq+44oK+oSXmfORC9uM561HllkHcM8JIFF1tf6Y89CRH\nlTrmWQVfZe18cY0VRIZRQXLLsILuC6+g/zMVDk9PpCcKTGBOiTlnraoTGKPhaIq1\ndthJ+8iqGoNKbghoBBXYqEO6o7DfH6B6pTcd3s6vAoGATuQZ1UNGR9nbOpuFoSwB\noRiAOAcyHjN9AWr3LUPL1ZqteehjzZ9DOXEaf1W09uLZ/JRhkhd96Eq5+BPew0vO\nN0dYexDurqsazwB9T4CY75P6aaLbFdcjYrjkPEHvzXZT//HqbWbsACadX8Bw+A3p\nFCLSzXkesGNbnChhmCnOt4M=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ansible@kbenson-workspace.iam.gserviceaccount.com",
+  "client_id": "109208532815975301435",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ansible%40kbenson-workspace.iam.gserviceaccount.com"
+}
