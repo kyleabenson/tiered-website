@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: '/tiered-website/',
   favicon: 'img/favicon.ico',
   organizationName: 'kyleabenson', // Usually your GitHub org/user name.
-  projectName: '3 Tier Site', // Usually your repo name.
+  projectName: 'tiered-website', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'My Site',
