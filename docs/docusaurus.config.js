@@ -11,7 +11,7 @@ module.exports = {
       title: 'My Site',
       logo: {
         alt: 'My Site Logo',
-        src: '../img/redhat.png',
+        src: 'img/redhat.png',
       },
       links: [
         {

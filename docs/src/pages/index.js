@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Collections Based</>,
-    imageUrl: '../img/Icon-Red_Hat-Media_and_documents-Paper_Stack_Lined-A-Red-RGB.svg',
+    imageUrl: 'img/Icon-Red_Hat-Media_and_documents-Paper_Stack_Lined-A-Red-RGB.svg',
     description: (
       <>
         Walk through what an Ansible Collection looks like as your progress through the sections.
@@ -18,7 +18,7 @@ const features = [
   },
   {
     title: <>Multi-cloud turtorials</>,
-    imageUrl: '../img/Icon-Red_Hat-Software_and_technologies-Cloud-B-Red-RGB.svg',
+    imageUrl: 'img/Icon-Red_Hat-Software_and_technologies-Cloud-B-Red-RGB.svg',
     description: (
       <>
         This guide gives you examples from the big 3 cloud providers so you can deploy and learn with flexibility.
@@ -27,7 +27,7 @@ const features = [
   },
   {
     title: <>Powered by Ansible Automation</>,
-    imageUrl: '../img/Icon-Red_Hat-Software_and_Technologies-Automation-B-Red-RGB.svg',
+    imageUrl: 'img/Icon-Red_Hat-Software_and_Technologies-Automation-B-Red-RGB.svg',
     description: (
       <>
         Extend or customize your website layout by reusing React. Docusaurus can
