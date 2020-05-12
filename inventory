@@ -1,7 +1,0 @@
-[presentation]
-foo1 ansible_host=10.0.0.5 
-foo3 ansible_host=10.0.0.6
-foo4 ansible_host=10.0.0.8
-[presentation:vars]
-ansible_user=kyleabenson 
-ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q kyleabenson@40.76.81.172"'
