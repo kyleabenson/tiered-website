@@ -2,7 +2,7 @@ module.exports = {
   title: 'Ansible for N-Tier Webapp Deployments',
   tagline: 'Learn to deploy to each major cloud provider quickly.',
   url: 'https://github.com/kyleabenson/tiered-website',
-  baseUrl: '/',
+  baseUrl: '/tiered-website/',
   favicon: 'img/favicon.ico',
   organizationName: 'kyleabenson', // Usually your GitHub org/user name.
   projectName: 'tiered-website', // Usually your repo name.
