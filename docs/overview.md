@@ -3,7 +3,7 @@ id: overview
 title: Overview
 sidebar_label: Overview
 ---
-Deploying a website 3 ways series Pt1: A Load Balanced, Autoscaling, Lamp Stack
+Deploying a website 3 ways series Pt1: An N-Tier Web App
 
 
 Goal:
