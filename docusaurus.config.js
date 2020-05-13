@@ -1,4 +1,4 @@
-git module.exports = {
+module.exports = {
   title: 'Ansible for N-Tier Webapp Deployments',
   tagline: 'Learn to deploy to each major cloud provider quickly.',
   url: 'https://kyleabenson.github.io/tiered-website',
