@@ -1,6 +1,7 @@
 module.exports = {
   someSidebar: {
-    Components: ['overview', 'presentation', 'bizlogic', 'db', 'lb'],
+    Overview: ['overview'],
+    Components: ['presentation', 'bizlogic', 'db', 'lb'],
     "Supported Clouds": ['aws', 'azure','gcp']
   },
 };
