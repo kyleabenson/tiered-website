@@ -8,7 +8,7 @@
 
 <title data-react-helmet="true">Google Cloud Platform | Ansible for N-Tier Webapp Deployments</title>
 
-<meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" property="og:title" content="Google Cloud Platform | Ansible for N-Tier Webapp Deployments"><meta data-react-helmet="true" name="description" content="Google Cloud Platform has a comprehensive and certified Ansible collection that provides a good deal of ease and flexibility in getting started with our deployment. "><meta data-react-helmet="true" property="og:description" content="Google Cloud Platform has a comprehensive and certified Ansible collection that provides a good deal of ease and flexibility in getting started with our deployment. "><meta data-react-helmet="true" property="og:url" content="https://kyleabenson.github.io/tiered-website/docs/gcp">
+<meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" property="og:title" content="Google Cloud Platform | Ansible for N-Tier Webapp Deployments"><meta data-react-helmet="true" name="description" content="Google Cloud Platform has a comprehensive and certified Ansible collection that provides a good deal of ease and flexibility in getting started with our deployment. "><meta data-react-helmet="true" property="og:description" content="Google Cloud Platform has a comprehensive and certified Ansible collection that provides a good deal of ease and flexibility in getting started with our deployment. "><meta data-react-helmet="true" property="og:url" content="https://kyleabenson.github.io/tiered-website/tiered-website/docs/gcp">
 
 <link data-react-helmet="true" rel="shortcut icon" href="/tiered-website/img/favicon.ico">
 
@@ -16,23 +16,23 @@
 <link rel="stylesheet" href="/tiered-website/styles.273885d5.css">
 
 
-<link rel="preload" href="/tiered-website/styles.631dcb0f.js" as="script">
+<link rel="preload" href="/tiered-website/styles.77a41af3.js" as="script">
 
-<link rel="preload" href="/tiered-website/runtime~main.f0c5c396.js" as="script">
+<link rel="preload" href="/tiered-website/runtime~main.88a59206.js" as="script">
 
-<link rel="preload" href="/tiered-website/main.8580c7a8.js" as="script">
+<link rel="preload" href="/tiered-website/main.b46ab0b8.js" as="script">
 
-<link rel="preload" href="/tiered-website/1.5903daec.js" as="script">
+<link rel="preload" href="/tiered-website/1.ec644f8d.js" as="script">
 
-<link rel="preload" href="/tiered-website/2.9988d07d.js" as="script">
+<link rel="preload" href="/tiered-website/2.4c4c9348.js" as="script">
 
-<link rel="preload" href="/tiered-website/20.90aef084.js" as="script">
+<link rel="preload" href="/tiered-website/20.4f78e627.js" as="script">
 
-<link rel="preload" href="/tiered-website/39b4e302.d0d09843.js" as="script">
+<link rel="preload" href="/tiered-website/39b4e302.6884ff92.js" as="script">
 
-<link rel="preload" href="/tiered-website/17896441.26ec7d20.js" as="script">
+<link rel="preload" href="/tiered-website/17896441.4c0ae586.js" as="script">
 
-<link rel="preload" href="/tiered-website/1800c3e5.c5ce6334.js" as="script">
+<link rel="preload" href="/tiered-website/1800c3e5.88b1af97.js" as="script">
 
 </head>
 <body>
@@ -48,23 +48,23 @@ Where the normal module would look like:<br>
 </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    - name: Create an Instance Group Manager</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      google.cloud.gcp_compute_instance_group_manager:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        name: &quot;{{gcp_instance_group_name}}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        base_instance_name: test1-child</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        instance_template: &quot;{{ instancetemplate }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        target_size: 3</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        zone: &quot;{{ gcp_zone }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        auth_kind: &quot;{{ gcp_cred_kind }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        project: &quot;{{ gcp_project }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        service_account_file: &quot;{{ gcp_cred_file }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        state: &quot;{{ desired_state }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      register: igm</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      ignore_errors: true</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    - name: Get Instance Group Info</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      google.cloud.gcp_compute_instance_group_info:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        filters:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">          - name = &quot;{{ gcp_instance_group_name }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        zone: &quot;{{ gcp_zone }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        auth_kind: &quot;{{ gcp_cred_kind }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        project: &quot;{{ gcp_project }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        service_account_file: &quot;{{ gcp_cred_file }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      register: iginfo</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      when: desired_state == &#x27;present&#x27;</span></div></div></div></div></div><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="application"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#application" title="Direct link to heading">#</a>Application</h2><p>The application layer in this example is a single host. </p><div class="mdxCodeBlock_iHAB"><div class="codeBlockContent_32p_"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><div tabindex="0" class="prism-code language-undefined codeBlock_19pQ"><div class="codeBlockLines_2n9r" style="color:#bfc7d5;background-color:#292d3e"><div class="token-line" style="color:#bfc7d5"><span class="token plain">    - name: Create Business Layer Host</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      google.cloud.gcp_compute_instance:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        name: bizlayer</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        machine_type: f1-micro</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        disks:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        - auto_delete: &#x27;true&#x27;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">          boot: &#x27;true&#x27;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">          device_name: device1</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">          initialize_params:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">            disk_size_gb: &quot;{{ disk_size_gb }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">            source_image: &quot;{{ gcp_source_image }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        network_interfaces:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        - network: &quot;{{ network }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        metadata:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">          ssh-keys: &quot;{{admin_user}}:{{ ssh_pub_key }}&quot; </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        zone: &quot;{{ gcp_zone }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        auth_kind: &quot;{{ gcp_cred_kind }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        project: &quot;{{ gcp_project }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        service_account_file: &quot;{{ gcp_cred_file }}&quot;</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        state: &quot;{{ desired_state }}&quot;</span></div></div></div></div></div><p>In some environments it would likely be desireable to have a load balancer and autoscale set here to keep the business layer from becoming a bottleneck. If that&#x27;s the case you can consider creating one similarly to how we did for the frontend systems.</p><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="load-balancer"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#load-balancer" title="Direct link to heading">#</a>Load Balancer</h2><p>As part of the certified collection from Google for Google Cloud Platform, they have provided a really nice role to configure a loadbalancer, making this a super easy setup:</p><div class="mdxCodeBlock_iHAB"><div class="codeBlockContent_32p_"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><div tabindex="0" class="prism-code language-undefined codeBlock_19pQ"><div class="codeBlockLines_2n9r" style="color:#bfc7d5;background-color:#292d3e"><div class="token-line" style="color:#bfc7d5"><span class="token plain">    - name: Create a Load Balancer</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">      import_role:</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        name: google.cloud.gcp_http_lb</span></div></div></div></div></div><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="database"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#database" title="Direct link to heading">#</a>Database</h2><p>Of all the steps in this provisioning process, the database creation takes the longest. Be patient during the creation period of these services to come online.</p><p>Once everything is complete, we&#x27;re ready to populate our database, setup the business logic server, and configure our frontend apps. </p><h1><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="config"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#config" title="Direct link to heading">#</a>Config</h1><p>TODO</p></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/facebook/docusaurus/edit/master/website/docs/gcp.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/tiered-website/docs/azure"><div class="pagination-nav__link--sublabel">Previous</div><div class="pagination-nav__link--label">« Azure</div></a></div><div class="pagination-nav__item pagination-nav__item--next"></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="contents contents__left-border"><li><a href="#prerequisites" class="contents__link">Prerequisites</a><ul><li><a href="#a-note-about-collections" class="contents__link">A note about collections</a></li></ul></li><li><a href="#presentation" class="contents__link">Presentation</a></li><li><a href="#application" class="contents__link">Application</a></li><li><a href="#load-balancer" class="contents__link">Load Balancer</a></li><li><a href="#database" class="contents__link">Database</a></li></ul></div></div></div></div></main></div></div>
 </div>
 
-<script src="/tiered-website/styles.631dcb0f.js"></script>
+<script src="/tiered-website/styles.77a41af3.js"></script>
 
-<script src="/tiered-website/runtime~main.f0c5c396.js"></script>
+<script src="/tiered-website/runtime~main.88a59206.js"></script>
 
-<script src="/tiered-website/main.8580c7a8.js"></script>
+<script src="/tiered-website/main.b46ab0b8.js"></script>
 
-<script src="/tiered-website/1.5903daec.js"></script>
+<script src="/tiered-website/1.ec644f8d.js"></script>
 
-<script src="/tiered-website/2.9988d07d.js"></script>
+<script src="/tiered-website/2.4c4c9348.js"></script>
 
-<script src="/tiered-website/20.90aef084.js"></script>
+<script src="/tiered-website/20.4f78e627.js"></script>
 
-<script src="/tiered-website/39b4e302.d0d09843.js"></script>
+<script src="/tiered-website/39b4e302.6884ff92.js"></script>
 
-<script src="/tiered-website/17896441.26ec7d20.js"></script>
+<script src="/tiered-website/17896441.4c0ae586.js"></script>
 
-<script src="/tiered-website/1800c3e5.c5ce6334.js"></script>
+<script src="/tiered-website/1800c3e5.88b1af97.js"></script>
 
 
 </body>
