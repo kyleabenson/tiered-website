@@ -1,0 +1,11 @@
+---
+- name: Deploy an N Tier app to the cloud of your choosing
+  hosts: localhost
+  tasks:
+    - name: Deploy to Google Cloud Platform
+      import_role:
+        name: kyleabenson.Ntierapp.gcp
+    
+    - name: Deploy to Azure
+      import_role:
+        name: kyleabenson.Ntierapp.azure

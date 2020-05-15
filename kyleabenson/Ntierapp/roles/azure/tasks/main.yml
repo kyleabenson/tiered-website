@@ -1,0 +1,4 @@
+---
+# tasks file for azure
+- debug:
+    msg: "Hello World!"

@@ -1,0 +1,4 @@
+---
+# tasks file for gcp
+- debug:
+    msg: "Hello World!"
