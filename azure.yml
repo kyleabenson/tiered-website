@@ -1,8 +1,6 @@
 ---
 - name: Setup Azure Infra
   hosts: localhost
-  vars_files:
-    - config.yml
 
   tasks:
     - name: Setup Resource Group in Azure
